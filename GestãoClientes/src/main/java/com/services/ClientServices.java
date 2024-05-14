@@ -32,7 +32,7 @@ public class ClientServices {
 		clientRepository.existsById(id);
 		Optional<ClientModel> optionalClientModel= clientRepository.findById(id);
 	    ClientModel clientModel = optionalClientModel.get();
-		BeanUtils.copyProperties(clientModel,clientDto);
+	    BeanUtils.copyProperties(clientDto, clientModel);
 		return ResponseEntity.status(HttpStatus.OK).body(clientRepository.save(clientModel));
 	}
 	
@@ -41,7 +41,6 @@ public class ClientServices {
 	}
 	public ResponseEntity<List<ClientModel>> getAllClient() {
 		return ResponseEntity.status(HttpStatus.OK).body(clientRepository.findAll());
-		//fazer retorno
 	}
 	
 	public ResponseEntity deleteClient(@PathVariable(value="id") Long id) {
