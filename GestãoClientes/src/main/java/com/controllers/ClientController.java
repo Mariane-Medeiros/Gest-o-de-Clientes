@@ -1,10 +1,13 @@
 package com.controllers;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Link;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -27,16 +30,17 @@ public class ClientController {
 	@Autowired
 	ClientServices clientservice;
 	
+
 	@PostMapping("/clients")
 		public ResponseEntity createClient(@RequestBody ClientDTO clientDto) {
 			return ResponseEntity.status(HttpStatus.CREATED).body(clientservice.saveClient(clientDto));
 		}
 	
+
 	@GetMapping("/clients")
-		public ResponseEntity getAllClients() {
+	public ResponseEntity getAllClients() {
 		return ResponseEntity.status(HttpStatus.OK).body(clientservice.getAllClient());
-		}
-		
+	}		
 	
 	@GetMapping("/clients/{id}")
 	public ResponseEntity getOneClient(@PathVariable(value = "id")long id) {
